@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Bootstrap -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" type="text/css"  href="{{ asset('css/font-awesome.css') }}">
@@ -435,8 +436,9 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="js/jquery.1.11.1.js"></script>
+    <script type="text/javascript" src={{asset('js/jquery.1.11.1.js')}}></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+
     <script type="text/javascript" src={{asset('js/bootstrap.js')}}></script>
     <script type="text/javascript" src={{asset('js/SmoothScroll.js')}}></script>
     <script type="text/javascript" src={{asset('js/jquery.prettyPhoto.js')}}></script>
