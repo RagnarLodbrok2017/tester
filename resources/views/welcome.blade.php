@@ -44,6 +44,39 @@
             <li> <a class="page-scroll" href="#team">Team</a> </li>
             <li> <a class="page-scroll" href="#testimonials">Testimonials</a> </li>
             <li> <a class="page-scroll" href="#contact">Contact</a> </li>
+            <!-- Authentication Links -->
+            <li class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Action
+              </a>
+            @guest
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #333;padding: 10px;">
+                  <a class="dropdown-item" href="{{ route('login') }}" style="padding: 10px;">Login</a>
+                  <a class="dropdown-item" href="{{ route('register') }}" style="padding: 10px;">Register</a>
+                </ul>
+            </li>
+            @else
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                  {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                      Logout
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                    </form>
+                  </li>
+                </ul>
+              </li>
+            @endguest
+          </ul>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -62,7 +95,12 @@
               <a href="#about" class="btn btn-default page-scroll">Learn More</a>
               @if (Route::has('login'))
               @auth
+                @if(Auth::user()->usertype == 0)
               <a  class="btn btn-default page-scroll" href="{{ url('/home/products') }}">Products</a>
+                  @endif
+                  @if(Auth::user()->usertype == 1)
+                    <a  class="btn btn-default page-scroll" href="{{ url('/adminhome') }}">Users</a>
+                  @endif
               @else
               <a  class="btn btn-default page-scroll" href="{{ route('login') }}">Login</a>
               <a  class="btn btn-default page-scroll" href="{{ route('register') }}">Register</a>

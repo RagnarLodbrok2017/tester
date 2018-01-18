@@ -98,14 +98,18 @@
             <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                 <label for="id" class="col-md-4 control-label">ID</label>
 
-                <div class="col-xs-8">
-                    <input id="id" type="number" class="form-control" name="id" value="{{$user->id}}" required autofocus>
-
-                    @if ($errors->has('id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('id') }}</strong>
-                        </span>
-                    @endif
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <select name="id" class="form-control">
+                                @if(isset($users))
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->id}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -166,13 +170,11 @@
       <label for="id">Enter the ID</label>
       {!! Form::search("id") !!}
       {!! Form::submit('done', ['class' => 'btn btn-warning'] )!!}
-      @if(isset($user))
-      {!! Form::label('id', $user->name) !!}
-      @endif
+
     </div>
   </div>
   <div class="text-center" style="margin-top:60px;">
-    <a href="/adminhome" class="btn btn-danger btn-lg">Back</a>
+    <a href="../" class="btn btn-danger btn-lg">Back</a>
   </div>
 </div>
 <script>
